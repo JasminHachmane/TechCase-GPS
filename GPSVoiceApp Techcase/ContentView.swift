@@ -1,24 +1,36 @@
 //
 //  ContentView.swift
-//  GPSVoiceApp Techcase
+//  GPSVoiceApp
 //
-//  Created by Jasmin Hachmane on 01/04/2025.
+//  Created by Jasmin Hachmane on 27/03/2025.
 //
 
 import SwiftUI
+import MapKit
 
+// Hoofdstructuur van de SwiftUI-weergave
 struct ContentView: View {
+    // Maak een instantie van LocationManager om locatie-updates te beheren
+    @StateObject private var locationManager = LocationManager()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            // Toon een kaart met de locatie van de gebruiker
+            Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
+                .edgesIgnoringSafeArea(.all) // Zorgt ervoor dat de kaart de volledige breedte gebruikt
+                .frame(height: 700)
+            
+            // Toon de totaal afgelegde afstand in meters
+            Text("Afgelegde afstand: \(Int(locationManager.totalDistance)) meter")
+                .font(.system(size: 20, weight: .bold, design: .default))
+                .foregroundColor(.red)
+                .padding()
         }
-        .padding()
     }
 }
+
 
 #Preview {
     ContentView()
 }
+
