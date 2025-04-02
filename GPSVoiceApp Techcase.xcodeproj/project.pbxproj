@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		16EAA90A2D9D39F7009458AA /* GPSVoiceApp-Techcase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16EAA9092D9D39F7009458AA /* GPSVoiceApp-Techcase-Info.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		16EAA8EA2D9C78DC009458AA /* GPSVoiceApp Techcase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPSVoiceApp Techcase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16EAA9092D9D39F7009458AA /* GPSVoiceApp-Techcase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GPSVoiceApp-Techcase-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		16EAA8E12D9C78DC009458AA = {
 			isa = PBXGroup;
 			children = (
+				16EAA9092D9D39F7009458AA /* GPSVoiceApp-Techcase-Info.plist */,
 				16EAA8EC2D9C78DC009458AA /* GPSVoiceApp Techcase */,
 				16EAA8EB2D9C78DC009458AA /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16EAA90A2D9D39F7009458AA /* GPSVoiceApp-Techcase-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,8 +259,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GPSVoiceApp Techcase/Preview Content\"";
+				DEVELOPMENT_TEAM = VR9XT3SVK4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GPSVoiceApp-Techcase-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -280,8 +289,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GPSVoiceApp Techcase/Preview Content\"";
+				DEVELOPMENT_TEAM = VR9XT3SVK4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "GPSVoiceApp-Techcase-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
