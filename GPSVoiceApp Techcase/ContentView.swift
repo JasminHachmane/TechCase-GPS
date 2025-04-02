@@ -19,10 +19,11 @@ struct ContentView: View {
             Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
                 .edgesIgnoringSafeArea(.all) // Zorgt ervoor dat de kaart de volledige breedte gebruikt
                 .frame(height: 700)
+                .padding(.bottom, 50)
             
             // Toon de totaal afgelegde afstand in meters
             Text("Afgelegde afstand: \(Int(locationManager.totalDistance)) meter")
-                .font(.system(size: 20, weight: .bold, design: .default))
+                .font(.system(size: 22, weight: .bold, design: .default))
                 .foregroundColor(.blue)
                 .padding(.bottom, 50)
         }
