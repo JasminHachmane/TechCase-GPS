@@ -13,7 +13,7 @@ struct ContentView: View {
     // Maak een instantie van LocationManager om locatie-updates te beheren
     @StateObject private var locationManager = LocationManager()
     
-    var body: some View {
+    var body: some View { 
         VStack {
             // Toon een kaart met de locatie van de gebruiker
             Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
@@ -23,8 +23,8 @@ struct ContentView: View {
             // Toon de totaal afgelegde afstand in meters
             Text("Afgelegde afstand: \(Int(locationManager.totalDistance)) meter")
                 .font(.system(size: 20, weight: .bold, design: .default))
-                .foregroundColor(.red)
-                .padding()
+                .foregroundColor(.blue)
+                .padding(.bottom, 50)
         }
     }
 }

@@ -1,10 +1,3 @@
-//
-//  LocationManager.swift
-//  GPSVoiceApp Techcase
-//
-//  Created by Jasmin Hachmane on 01/04/2025.
-//
-
 import Foundation
 import MapKit
 import CoreLocation
@@ -31,24 +24,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     // Functie die wordt aangeroepen wanneer de locatie verandert
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let newLocation = locations.last else { return } // Zorg ervoor dat er een nieuwe locatie is
+        guard let newLocation = locations.last else { return }
 
-        DispatchQueue.main.async {
-            self.region.center = newLocation.coordinate // Update de kaartpositie met de nieuwe locatie
-        }
+        let distance = previousLocation?.distance(from: newLocation) ?? 0.0
+        let updatedTotalDistance = totalDistance + distance
 
-        // Bereken de afgelegde afstand sinds de vorige locatie
-        if let previousLocation = previousLocation {
-            let distance = newLocation.distance(from: previousLocation) // Bereken de afstand in meters
-            totalDistance += distance // Voeg de afstand toe aan het totaal
-            
-            if self.totalDistance >= 5.0 { // Controleer of er minstens 5 meter is afgelegd
-                self.speakDistance() // Spreek de afstand uit via spraak
-                self.totalDistance = 0.0 // Reset de teller na het uitspreken
+        if updatedTotalDistance >= 5.0 { // Spreek elke 5 meter
+            speakDistance()
+            previousLocation = newLocation // Reset vorige locatie om nieuwe meting te starten
+            DispatchQueue.main.async {
+                self.totalDistance = 0.0
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.totalDistance = updatedTotalDistance
             }
         }
 
-        previousLocation = newLocation // Sla de nieuwe locatie op als de vorige locatie voor de volgende meting
+        // Update kaartpositie
+        DispatchQueue.main.async {
+            self.region.center = newLocation.coordinate
+        }
+
+        previousLocation = newLocation
     }
 
     // Functie om de gebruiker spraakfeedback te geven over de afgelegde afstand
@@ -59,3 +57,4 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         speechSynthesizer.speak(utterance) // Start de spraakuitvoer
     }
 }
+
