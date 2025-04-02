@@ -6,7 +6,7 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Deze app heeft toegang tot je locatie nodig om je bewegingen bij te houden.</string>
     
-    <!-- Huidige configuratie (bijvoorbeeld de URL-schemas die je hebt) -->
+    <!-- Huidige configuratie -->
     <key>CFBundleURLTypes</key>
     <array>
         <dict/>
