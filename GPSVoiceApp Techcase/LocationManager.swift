@@ -1,5 +1,5 @@
 import Foundation
-import MapKit
+import MapKit //Kaart
 import CoreLocation
 import AVFoundation
 
@@ -51,10 +51,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     // Functie om de gebruiker spraakfeedback te geven over de afgelegde afstand
     private func speakDistance() {
-        let message = "Je hebt nu 5 meter gereisd." // Bericht dat wordt uitgesproken
+        let message = "Je hebt 5 meter gereisd." // Bericht dat wordt uitgesproken
         let utterance = AVSpeechUtterance(string: message)
         utterance.voice = AVSpeechSynthesisVoice(language: "nl-NL") // Gebruik een Nederlandse stem
         speechSynthesizer.speak(utterance) // Start de spraakuitvoer
     }
 }
+
 
