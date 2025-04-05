@@ -8,21 +8,21 @@
 import SwiftUI
 import MapKit
 
-// Hoofdstructuur van de SwiftUI-weergave
+// Main structure of the SwiftUI view
 struct ContentView: View {
-    // Maak een instantie van LocationManager om locatie-updates te beheren
+    // Create an instance of LocationManager to handle location updates
     @StateObject private var locationManager = LocationManager()
     
-    var body: some View { 
+    var body: some View {
         VStack {
-            // Toon een kaart met de locatie van de gebruiker
+            // Show a map with the user's location
             Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
-                .edgesIgnoringSafeArea(.all) // Zorgt ervoor dat de kaart de volledige breedte gebruikt
+                .edgesIgnoringSafeArea(.all)
                 .frame(height: 700)
                 .padding(.bottom, 50)
             
-            // Toon de totaal afgelegde afstand in meters
-            Text("Afgelegde afstand: \(Int(locationManager.totalDistance)) meter")
+            // Show the total distance traveled in meters
+            Text("Afgelegde afstand: \(Int(locationManager.totalDistance)) meters")
                 .font(.system(size: 22, weight: .bold, design: .default))
                 .foregroundColor(.blue)
                 .padding(.bottom, 50)

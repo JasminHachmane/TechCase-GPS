@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Voeg locatie permissie toe -->
+    <!-- Add location premission -->
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Deze app heeft toegang tot je locatie nodig om je bewegingen bij te houden.</string>
     
-    <!-- Huidige configuratie -->
+    <!-- Current configuration -->
     <key>CFBundleURLTypes</key>
     <array>
         <dict/>
