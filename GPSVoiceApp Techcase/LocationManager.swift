@@ -1,37 +1,37 @@
 import Foundation
-import MapKit //Kaart
+import MapKit // Map
 import CoreLocation
 import AVFoundation
 
-// LocationManager beheert de locatie-updates en spraakfeedback
+// LocationManager handles location updates and voice feedback
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private var locationManager = CLLocationManager() // Instantie van CLLocationManager voor locatie-updates
+    private var locationManager = CLLocationManager() // This gets the device's location
     @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 52.3702, longitude: 4.8952), // Amsterdam als startpunt
-        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // Zoomniveau van de kaart
+        center: CLLocationCoordinate2D(latitude: 52.3702, longitude: 4.8952), // Starting point: Amsterdam
+        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // Zoom level for the map
     )
     
-    @Published var totalDistance: Double = 0.0 // Houdt de totaal afgelegde afstand bij
-    private var previousLocation: CLLocation? // Slaat de vorige locatie op om afstand te berekenen
-    private let speechSynthesizer = AVSpeechSynthesizer() // Spraakondersteuning voor feedback
+    @Published var totalDistance: Double = 0.0 // Keeps track of total distance traveled
+    private var previousLocation: CLLocation? // Saves the last location to measure distance
+    private let speechSynthesizer = AVSpeechSynthesizer() // Used to speak messages out loud
 
     override init() {
         super.init()
-        locationManager.delegate = self // Stel deze klasse in als de delegate
-        locationManager.requestWhenInUseAuthorization() // Vraag toestemming voor locatietoegang
-        locationManager.startUpdatingLocation() // Start het volgen van locatie-updates
+        locationManager.delegate = self // Set this class to handle location updates
+        locationManager.requestWhenInUseAuthorization() // Ask for permission to use location
+        locationManager.startUpdatingLocation() // Start getting location updates
     }
 
-    // Functie die wordt aangeroepen wanneer de locatie verandert
+    // This function runs when the location changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.last else { return }
 
         let distance = previousLocation?.distance(from: newLocation) ?? 0.0
         let updatedTotalDistance = totalDistance + distance
 
-        if updatedTotalDistance >= 5.0 { // Spreek elke 5 meter
+        if updatedTotalDistance >= 5.0 { // Speak every 5 meters
             speakDistance()
-            previousLocation = newLocation // Reset vorige locatie om nieuwe meting te starten
+            previousLocation = newLocation // Save this as the new starting point
             DispatchQueue.main.async {
                 self.totalDistance = 0.0
             }
@@ -41,7 +41,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
 
-        // Update kaartpositie
+        // Update the map position
         DispatchQueue.main.async {
             self.region.center = newLocation.coordinate
         }
@@ -49,13 +49,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         previousLocation = newLocation
     }
 
-    // Functie om de gebruiker spraakfeedback te geven over de afgelegde afstand
+    // This function speaks a message about the distance traveled
     private func speakDistance() {
-        let message = "Je hebt 5 meter gereisd." // Bericht dat wordt uitgesproken
+        let message = "Je hebt 5 meter gereisd." // Message that will be spoken
         let utterance = AVSpeechUtterance(string: message)
-        utterance.voice = AVSpeechSynthesisVoice(language: "nl-NL") // Gebruik een Nederlandse stem
-        speechSynthesizer.speak(utterance) // Start de spraakuitvoer
+        utterance.voice = AVSpeechSynthesisVoice(language: "nl-NL") // Use a Dutch voice
+        speechSynthesizer.speak(utterance) // Speak the message
     }
 }
-
 
